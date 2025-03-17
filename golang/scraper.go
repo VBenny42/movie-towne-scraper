@@ -9,8 +9,6 @@ import (
 )
 
 const (
-	site = "https://www.movietowne.com/cinemas/nowshowing/san-fernando/"
-
 	currentYear = 2025
 
 	releaseFormat  = "02/01/2006"
@@ -32,7 +30,7 @@ type (
 	}
 )
 
-func scrapeMovies() (movies []Movie, err error) {
+func scrapeMovies(site string) (movies []Movie, err error) {
 	c := colly.NewCollector()
 
 	c.OnHTML("div.thumbnail", func(e *colly.HTMLElement) {

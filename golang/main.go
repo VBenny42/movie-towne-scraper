@@ -7,8 +7,10 @@ import (
 	"time"
 )
 
+const sando = "https://www.movietowne.com/cinemas/nowshowing/san-fernando/"
+
 func scrapeAndSave() error {
-	movies, err := scrapeMovies()
+	movies, err := scrapeMovies(sando)
 	if err != nil {
 		return err
 	}
@@ -30,7 +32,7 @@ func scrapeAndSave() error {
 
 // flag to force the scraper to run
 // otherwise, check modified time of movies.json
-// only scrape if it's older than 24 hours
+// only scrape if it's another day
 
 func main() {
 	var (
@@ -64,7 +66,7 @@ func main() {
 			}
 		}
 
-		if data.ModTime().Add(24 * time.Hour).Before(time.Now()) {
+		if data.ModTime().Day() != time.Now().Day() {
 			fmt.Println("Updating movies.json")
 			err := scrapeAndSave()
 			if err != nil {
