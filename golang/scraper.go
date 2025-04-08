@@ -27,6 +27,7 @@ type (
 		ReleaseDate time.Time  `json:"releaseDate"`
 		Link        string     `json:"link"`
 		ShowTimes   []ShowTime `json:"showTimes"`
+		Genre       []string   `json:"genre"`
 	}
 )
 
@@ -74,6 +75,16 @@ func scrapeMovies(site string) (movies []Movie, err error) {
 
 func (m *Movie) scrapeMovieTimes() (err error) {
 	c := colly.NewCollector()
+
+	c.OnHTML("p.selected_movie_categories", func(e *colly.HTMLElement) {
+		e.ForEach("span", func(i int, el *colly.HTMLElement) {
+			if i == 0 {
+				return
+			}
+
+			m.Genre = append(m.Genre, strings.Split(el.Text, ", ")...)
+		})
+	})
 
 	// Need to read date from the time_date div, then get the times from the
 	// time slot divs in time sheet

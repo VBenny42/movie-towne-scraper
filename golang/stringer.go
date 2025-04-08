@@ -7,9 +7,10 @@ import (
 
 func (m Movie) String() string {
 	return fmt.Sprintf(
-		"%s (%s) - [%s]: times: %s",
+		"%s (%s) {%s} - [%s]: times: %s",
 		m.Title,
 		m.ReleaseDate.Format(releaseFormat),
+		strings.Join(m.Genre, ", "),
 		m.Link,
 		m.ShowTimes,
 	)
