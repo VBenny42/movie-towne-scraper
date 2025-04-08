@@ -1,15 +1,19 @@
 package main
 
 import (
+	"cmp"
 	"flag"
 	"fmt"
 	"os"
+	"slices"
 	"time"
 )
 
 const (
 	sando = "https://www.movietowne.com/cinemas/nowshowing/san-fernando/"
 	pos   = "https://www.movietowne.com/cinemas/nowshowing/port-of-spain/"
+
+	jsonLocation = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movies.json"
 )
 
 func scrapeAndSave(url string) error {
@@ -25,7 +29,14 @@ func scrapeAndSave(url string) error {
 		}
 	}
 
-	err = writeToJSON(movies, "movies.json")
+	slices.SortFunc(movies, func(a, b Movie) int {
+		return cmp.Compare(
+			a.ShowTimes[0].Times[0].Unix(),
+			b.ShowTimes[0].Times[0].Unix(),
+		)
+	})
+
+	err = writeToJSON(movies, jsonLocation)
 	if err != nil {
 		return err
 	}
@@ -59,7 +70,7 @@ func main() {
 	} else {
 		fmt.Println("Checking modified time")
 
-		data, err := os.Stat("movies.json")
+		data, err := os.Stat(jsonLocation)
 		if err != nil {
 			if os.IsNotExist(err) {
 				fmt.Println("File does not exist, forcing scrape")
@@ -68,7 +79,7 @@ func main() {
 					fmt.Println(err)
 					return
 				}
-				data, _ = os.Stat("movies.json")
+				data, _ = os.Stat(jsonLocation)
 			} else {
 				fmt.Println(err)
 				return
@@ -85,7 +96,7 @@ func main() {
 	}
 
 	if *shouldPrint {
-		movies, err := readFromJSON("movies.json")
+		movies, err := readFromJSON(jsonLocation)
 		if err != nil {
 			fmt.Println(err)
 			return
