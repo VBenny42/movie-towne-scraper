@@ -49,11 +49,18 @@ export default function Command() {
           times: showTime.times.map((time: string) => new Date(time)),
         }));
 
+        for (const genre of movie.genre) {
+          if (!genreColors[genre as keyof typeof genreColors]) {
+            throw new Error(`Unknown genre: ${genre}, please update the genreColors mapping.`);
+          }
+        }
+
         return {
           title: movie.title,
           releaseDate: new Date(movie.releaseDate),
           genre: movie.genre,
           link: movie.link,
+          synopsis: movie.synopsis,
           showTimes,
         };
       });
@@ -96,7 +103,10 @@ export default function Command() {
                 icon={Icon.Calendar}
                 target={
                   <Detail
-                    markdown={`## Show Times
+                    markdown={`
+${movie.synopsis}
+
+## Show Times
 
 | Date | Showtimes |
 |------|-----------|

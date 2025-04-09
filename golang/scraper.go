@@ -28,6 +28,7 @@ type (
 		Link        string     `json:"link"`
 		ShowTimes   []ShowTime `json:"showTimes"`
 		Genre       []string   `json:"genre"`
+		Synopsis    string     `json:"synopsis"`
 	}
 )
 
@@ -75,6 +76,16 @@ func scrapeMovies(site string) (movies []Movie, err error) {
 
 func (m *Movie) scrapeMovieTimes() (err error) {
 	c := colly.NewCollector()
+
+	c.OnHTML("div.selected_movie_synopsis", func(e *colly.HTMLElement) {
+		e.ForEach("p", func(i int, el *colly.HTMLElement) {
+			if i == 0 {
+				return
+			}
+
+			m.Synopsis = strings.TrimSpace(el.Text)
+		})
+	})
 
 	c.OnHTML("p.selected_movie_categories", func(e *colly.HTMLElement) {
 		e.ForEach("span", func(i int, el *colly.HTMLElement) {
