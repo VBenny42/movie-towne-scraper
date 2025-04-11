@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import fs from "fs";
 import { ActionPanel, Action, List, Toast, showToast, Color, Icon, Detail } from "@raycast/api";
 import { useExec } from "@raycast/utils";
-import { scraperPath, Movie } from "./types";
+import { scraperPath, Movie, ShowTime } from "./types";
 
 const genreColors = {
   Action: "#E63946", // Vibrant red
@@ -33,7 +33,10 @@ export default function Command() {
   }, [isLoading]);
 
   const parseMovies = async () => {
-    const toast = await showToast({ style: Toast.Style.Animated, title: "Parsing Movies..." });
+    const toast = await showToast({
+      style: Toast.Style.Animated,
+      title: "Parsing Movies...",
+    });
 
     try {
       const rawData = fs.readFileSync(scraperPath + "movies.json", "utf-8");
@@ -43,10 +46,10 @@ export default function Command() {
         throw new Error("Invalid JSON data");
       }
 
-      const parsedMovies = jsonData.map((movie: any) => {
-        const showTimes = movie.showTimes.map((showTime: any) => ({
+      const parsedMovies = jsonData.map((movie: Movie) => {
+        const showTimes = movie.showTimes.map((showTime: ShowTime) => ({
           date: new Date(showTime.date),
-          times: showTime.times.map((time: string) => new Date(time)),
+          times: showTime.times.map((time) => new Date(time)),
         }));
 
         for (const genre of movie.genre) {
@@ -64,14 +67,15 @@ export default function Command() {
           showTimes,
         };
       });
+
       toast.style = Toast.Style.Success;
       toast.title = "Movies Parsed Successfully";
 
       setMovies(parsedMovies);
-    } catch (error: any) {
+    } catch (error) {
       toast.style = Toast.Style.Failure;
       toast.title = "Error Parsing Movies";
-      toast.message = error.message;
+      toast.message = error instanceof Error ? error.message : "Unknown error occurred";
     }
   };
 
