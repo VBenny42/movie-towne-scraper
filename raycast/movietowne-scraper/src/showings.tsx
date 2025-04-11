@@ -25,19 +25,28 @@ export default function Command() {
   const { isLoading } = useExec(scraperPath + "movie-towne-scraper", ["--print=false"]);
 
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [toast, setToast] = useState<Toast | null>(null);
 
   useEffect(() => {
-    if (!isLoading) {
-      parseMovies();
+    async function showLoadingToast() {
+      const newToast = await showToast({
+        style: Toast.Style.Animated,
+        title: "Loading Movies Data...",
+      });
+      setToast(newToast);
+    }
+
+    if (isLoading) {
+      showLoadingToast();
+    } else {
+      if (toast) {
+        toast.title = "Parsing Movies...";
+        parseMovies();
+      }
     }
   }, [isLoading]);
 
   const parseMovies = async () => {
-    const toast = await showToast({
-      style: Toast.Style.Animated,
-      title: "Parsing Movies...",
-    });
-
     try {
       const rawData = fs.readFileSync(scraperPath + "movies.json", "utf-8");
       const jsonData = JSON.parse(rawData);
@@ -68,14 +77,26 @@ export default function Command() {
         };
       });
 
-      toast.style = Toast.Style.Success;
-      toast.title = "Movies Parsed Successfully";
+      if (!toast) {
+        const newToast = await showToast({
+          style: Toast.Style.Animated,
+          title: "Parsing Movies...",
+        });
+        setToast(newToast);
+      }
+
+      if (toast) {
+        toast.style = Toast.Style.Success;
+        toast.title = "Movies Parsed Successfully";
+      }
 
       setMovies(parsedMovies);
     } catch (error) {
-      toast.style = Toast.Style.Failure;
-      toast.title = "Error Parsing Movies";
-      toast.message = error instanceof Error ? error.message : "Unknown error occurred";
+      if (toast) {
+        toast.style = Toast.Style.Failure;
+        toast.title = "Error Parsing Movies";
+        toast.message = error instanceof Error ? error.message : "Unknown error occurred";
+      }
     }
   };
 
