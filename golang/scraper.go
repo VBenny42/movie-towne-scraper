@@ -44,7 +44,11 @@ func scrapeMovies(site string) (movies []Movie, err error) {
 			case 0:
 				m.Title = el.Text
 			case 1:
-				m.ReleaseDate, err = time.Parse(releaseFormat, strings.Fields(el.Text)[2])
+				m.ReleaseDate, err = time.ParseInLocation(
+					releaseFormat,
+					strings.Fields(el.Text)[2],
+					time.Local,
+				)
 				if err != nil {
 					return
 				}
@@ -52,15 +56,6 @@ func scrapeMovies(site string) (movies []Movie, err error) {
 				err = fmt.Errorf("unexpected element: %s", el.Text)
 				return
 			}
-
-			// if strings.HasPrefix(el.Text, "Release Date:") {
-			// 	m.releaseDate, err = time.Parse(releaseFormat, strings.Fields(el.Text)[2])
-			// 	if err != nil {
-			// 		return
-			// 	}
-			// } else {
-			// 	m.title = el.Text
-			// }
 		})
 
 		link := e.ChildAttr("a", "href")
@@ -89,11 +84,15 @@ func (m *Movie) scrapeMovieTimes() (err error) {
 
 	c.OnHTML("p.selected_movie_categories", func(e *colly.HTMLElement) {
 		e.ForEach("span", func(i int, el *colly.HTMLElement) {
-			if i == 0 {
+			switch i {
+			case 0:
+				return
+			case 1:
+				m.Genre = strings.Split(strings.TrimSpace(el.Text), ", ")
+			default:
+				err = fmt.Errorf("unexpected element: %s", el.Text)
 				return
 			}
-
-			m.Genre = append(m.Genre, strings.Split(el.Text, ", ")...)
 		})
 	})
 
@@ -126,9 +125,7 @@ func (m *Movie) scrapeMovieTimes() (err error) {
 				return
 			}
 
-			airTime := el.Text
-
-			t, err = time.Parse(showTimeFormat, airTime)
+			t, err = time.Parse(showTimeFormat, el.Text)
 			if err != nil {
 				err = fmt.Errorf("%s: %w", m.Link, err)
 				return
