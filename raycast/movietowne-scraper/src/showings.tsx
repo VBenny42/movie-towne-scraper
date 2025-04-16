@@ -26,23 +26,26 @@ export default function Command() {
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [toast, setToast] = useState<Toast | null>(null);
+  const currentDate = new Date();
+
+  async function initializeToast(title: string) {
+    const newToast = await showToast({
+      style: Toast.Style.Animated,
+      title: title,
+    });
+    setToast(newToast);
+  }
 
   useEffect(() => {
-    async function showLoadingToast() {
-      const newToast = await showToast({
-        style: Toast.Style.Animated,
-        title: "Loading Movies Data...",
-      });
-      setToast(newToast);
-    }
-
     if (isLoading) {
-      showLoadingToast();
+      initializeToast("Loading Movies...");
     } else {
       if (toast) {
         toast.title = "Parsing Movies...";
-        parseMovies();
+      } else {
+        initializeToast("Parsing Movies...");
       }
+      parseMovies();
     }
   }, [isLoading]);
 
@@ -55,7 +58,7 @@ export default function Command() {
         throw new Error("Invalid JSON data");
       }
 
-      const parsedMovies = jsonData.map((movie: Movie) => {
+      const parsedMovies = jsonData.map((movie: Movie): Movie => {
         const showTimes = movie.showTimes.map((showTime: ShowTime) => ({
           date: new Date(showTime.date),
           times: showTime.times.map((time) => new Date(time)),
@@ -71,19 +74,46 @@ export default function Command() {
           title: movie.title,
           releaseDate: new Date(movie.releaseDate),
           genre: movie.genre,
+          nextShowing:
+            showTimes
+              .slice(0, 1)
+              .flatMap((showTime) => showTime.times)
+              .find((time) => time > currentDate) || null,
           link: movie.link,
           synopsis: movie.synopsis,
           showTimes,
         };
       });
 
-      if (!toast) {
-        const newToast = await showToast({
-          style: Toast.Style.Animated,
-          title: "Parsing Movies...",
-        });
-        setToast(newToast);
+      if (parsedMovies.length === 0) {
+        throw new Error("No movies found");
       }
+
+      // DONE: Want to display the movies in order of showtime
+      // In order of showtime meaning, it should be sorted by which showtime is closest to the current time
+      // I also want to display all the showtimes in the detail view
+
+      parsedMovies.sort((a, b) => {
+        const aNextShowTime = a.nextShowing;
+        const bNextShowTime = b.nextShowing;
+
+        // Keeo original order if both are null
+        if (!aNextShowTime && !bNextShowTime) {
+          return 0;
+        }
+
+        // If only a null, push to the end
+        if (!aNextShowTime) {
+          return 1;
+        }
+
+        // If only b null, push to the end
+        if (!bNextShowTime) {
+          return -1;
+        }
+
+        return aNextShowTime.getTime() - bNextShowTime.getTime();
+      });
 
       if (toast) {
         toast.style = Toast.Style.Success;
@@ -106,12 +136,20 @@ export default function Command() {
         <List.Item
           key={movie.link}
           title={movie.title}
-          subtitle={movie.showTimes[0].times[0].toLocaleTimeString([], {
-            weekday: "short",
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-          })}
+          subtitle={(() => {
+            const nextShowTime = movie.nextShowing;
+
+            if (!nextShowTime) {
+              return "No upcoming showtimes for today";
+            }
+
+            return nextShowTime.toLocaleString([], {
+              weekday: "short",
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            });
+          })()}
           accessories={movie.genre
             .map(
               (genre): List.Item.Accessory => ({

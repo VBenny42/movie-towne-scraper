@@ -6,6 +6,7 @@ export type ShowTime = {
 export type Movie = {
   title: string;
   releaseDate: Date;
+  nextShowing: Date | null;
   link: string;
   genre: string[];
   showTimes: ShowTime[];
