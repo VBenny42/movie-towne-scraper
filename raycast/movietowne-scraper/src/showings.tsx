@@ -25,7 +25,7 @@ const genreColors = {
 };
 
 export default function Command() {
-  const { isLoading } = useExec(scraperPath + "movie-towne-scraper", ["--print=false"]);
+  const { isLoading } = useExec(scraperPath + "movie-towne-scraper", ["--print=false", "--verbose=false"]);
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [toast, setToast] = useState<Toast | null>(null);

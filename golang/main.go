@@ -3,7 +3,7 @@ package main
 import (
 	"cmp"
 	"flag"
-	"fmt"
+	"log/slog"
 	"os"
 	"slices"
 	"time"
@@ -53,6 +53,7 @@ func main() {
 		force       = flag.Bool("force", false, "force the scraper to run")
 		shouldPrint = flag.Bool("print", true, "print the movies to stdout")
 		posFlag     = flag.Bool("pos", false, "scrape the POS site")
+		verbose     = flag.Bool("verbose", true, "enable verbose logging")
 	)
 	flag.Parse()
 
@@ -61,36 +62,42 @@ func main() {
 		url = pos
 	}
 
+	if *verbose {
+		slog.SetLogLoggerLevel(slog.LevelInfo)
+	} else {
+		slog.SetLogLoggerLevel(slog.LevelWarn)
+	}
+
 	if *force {
-		fmt.Println("Forcing scrape")
+		slog.Info("Forcing scrape")
 		err := scrapeAndSave(url)
 		if err != nil {
-			fmt.Println(err)
+			slog.Error(err.Error())
 		}
 	} else {
-		fmt.Println("Checking modified time")
+		slog.Info("Checking modified time")
 
 		data, err := os.Stat(jsonLocation)
 		if err != nil {
 			if os.IsNotExist(err) {
-				fmt.Println("File does not exist, forcing scrape")
+				slog.Warn("File does not exist, forcing scrape")
 				err := scrapeAndSave(url)
 				if err != nil {
-					fmt.Println(err)
+					slog.Error(err.Error())
 					return
 				}
 				data, _ = os.Stat(jsonLocation)
 			} else {
-				fmt.Println(err)
+				slog.Error(err.Error())
 				return
 			}
 		}
 
 		if data.ModTime().Day() != time.Now().Day() {
-			fmt.Println("Updating movies.json")
+			slog.Info("Updating movies.json")
 			err := scrapeAndSave(url)
 			if err != nil {
-				fmt.Println(err)
+				slog.Error(err.Error())
 			}
 		}
 	}
@@ -98,12 +105,12 @@ func main() {
 	if *shouldPrint {
 		movies, err := readFromJSON(jsonLocation)
 		if err != nil {
-			fmt.Println(err)
+			slog.Error(err.Error())
 			return
 		}
 
 		for _, m := range movies {
-			fmt.Println(m)
+			slog.Info(m.String())
 		}
 	}
 }
