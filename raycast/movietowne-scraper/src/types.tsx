@@ -13,4 +13,4 @@ export type Movie = {
   synopsis: string;
 };
 
-export const scraperPath = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/";
+export const scraperPath = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/";

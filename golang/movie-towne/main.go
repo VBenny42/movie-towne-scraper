@@ -13,7 +13,7 @@ const (
 	sando = "https://www.movietowne.com/cinemas/nowshowing/san-fernando/"
 	pos   = "https://www.movietowne.com/cinemas/nowshowing/port-of-spain/"
 
-	jsonLocation = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movies.json"
+	jsonLocation = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/movies.json"
 )
 
 func scrapeAndSave(url string) error {
