@@ -19,9 +19,11 @@ const genreColors = {
   Romance: "#FF5D8F", // Rose pink
   "Sci-Fi": "#3A86FF", // Electric blue
   Thriller: "#073B4C", // Dark teal
+  "Action/Thriller": "#073B4C", // Dark teal
   "Drama/Suspense": "#8C1D40", // Deep crimson
   Biography: "#2A9D8F", // Teal green
   Suspense: "#540B0E", // Deep burgundy red
+  Crime: "#540B0E", // Deep burgundy red
 };
 
 export default function Command() {
