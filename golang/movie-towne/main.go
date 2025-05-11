@@ -12,9 +12,18 @@ import (
 const (
 	sando = "https://www.movietowne.com/cinemas/nowshowing/san-fernando/"
 	pos   = "https://www.movietowne.com/cinemas/nowshowing/port-of-spain/"
-
-	jsonLocation = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/movies.json"
 )
+
+func getJsonLocation(url string) string {
+	switch url {
+	case sando:
+		return "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/movies-san-fernando.json"
+	case pos:
+		return "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/movies-port-of-spain.json"
+	default:
+		return "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/movies-san-fernando.json"
+	}
+}
 
 func scrapeAndSave(url string) error {
 	movies, err := scrapeMovies(url)
@@ -36,7 +45,7 @@ func scrapeAndSave(url string) error {
 		)
 	})
 
-	err = writeToJSON(movies, jsonLocation)
+	err = writeToJSON(movies, getJsonLocation(url))
 	if err != nil {
 		return err
 	}
@@ -61,6 +70,7 @@ func main() {
 	if *posFlag {
 		url = pos
 	}
+	jsonLocation := getJsonLocation(url)
 
 	if *verbose {
 		slog.SetLogLoggerLevel(slog.LevelInfo)
@@ -94,7 +104,7 @@ func main() {
 		}
 
 		if data.ModTime().Day() != time.Now().Day() {
-			slog.Info("Updating movies.json")
+			slog.Info("Updating " + jsonLocation)
 			err := scrapeAndSave(url)
 			if err != nil {
 				slog.Error(err.Error())
