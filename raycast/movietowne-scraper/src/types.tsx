@@ -13,4 +13,12 @@ export type Movie = {
   synopsis: string;
 };
 
+export type CinemaLocation = { id: string; name: string };
+export type ScraperConfig = {
+  [key: string]: {
+    path: string;
+    args: string[];
+  };
+};
+
 export const scraperPath = "/Users/vineshbenny/Projects/movie-towne-scraper/golang/movie-towne/";

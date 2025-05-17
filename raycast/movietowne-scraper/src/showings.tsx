@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import fs from "fs";
 import { ActionPanel, Action, List, Toast, showToast, Color, Icon, Detail } from "@raycast/api";
 import { useExec } from "@raycast/utils";
-import { scraperPath, Movie, ShowTime } from "./types";
+import { scraperPath, Movie, ShowTime, CinemaLocation, ScraperConfig } from "./types";
 
 const genreColors = {
   Action: "#E63946", // Vibrant red
@@ -13,7 +13,11 @@ const genreColors = {
   Drama: "#6A4C93", // Deep purple
   Family: "#8AC926", // Grass green
   "Fantasy/Adventure": "#7209B7", // Magical purple
+  Fantasy: "#7209B7", // Magical purple
   Horror: "#480CA8", // Dark violet
+  "Horror/Thriller": "#3A0CA3", // Deep indigo purple
+  "Thriller/Horror": "#590925", // Dark burgundy
+  "Drama/Thriller": "#4B3A26", // Dark amber/brown
   Music: "#FB5607", // Bright orange
   "Musical/Performing Arts": "#FF85EA", // Pink
   Romance: "#FF5D8F", // Rose pink
@@ -26,12 +30,151 @@ const genreColors = {
   Crime: "#540B0E", // Deep burgundy red
 };
 
-export default function Command() {
-  const { isLoading } = useExec(scraperPath + "movie-towne-scraper", ["--print=false", "--verbose=false"]);
+function CinemaDropdown(props: { cinemas: CinemaLocation[]; onCinemaChange: (newValue: string) => void }) {
+  const { cinemas, onCinemaChange } = props;
+  return (
+    <List.Dropdown
+      tooltip="Select Cinema"
+      storeValue={true}
+      onChange={(newValue) => {
+        onCinemaChange(newValue);
+      }}
+    >
+      {cinemas.map((cinema) => (
+        <List.Dropdown.Item key={cinema.id} title={cinema.name} value={cinema.id} />
+      ))}
+    </List.Dropdown>
+  );
+}
 
+function movieToListItem(movie: Movie) {
+  return (
+    <List.Item
+      key={movie.link}
+      title={movie.title}
+      subtitle={(() => {
+        const nextShowTime = movie.nextShowing;
+
+        if (!nextShowTime) {
+          return "No upcoming showtimes for today";
+        }
+
+        return nextShowTime.toLocaleString([], {
+          weekday: "short",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+      })()}
+      accessories={movie.genre
+        .map(
+          (genre): List.Item.Accessory => ({
+            icon: Icon.Tag,
+            tooltip: genre,
+          }),
+        )
+        // .slice(0, 3)
+        .concat([{ date: movie.releaseDate }])}
+      actions={
+        <ActionPanel>
+          <Action.Push
+            title="Show Times"
+            icon={Icon.Calendar}
+            target={
+              <Detail
+                markdown={`
+${movie.synopsis}
+
+## Show Times
+
+| Date | Showtimes |
+|------|-----------|
+${movie.showTimes
+  .map(
+    (showTime) =>
+      `| ${showTime.date.toLocaleDateString([], {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+      })} | ${showTime.times
+        .map((time) =>
+          time.toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }),
+        )
+        .join(", ")} |`,
+  )
+  .join("\n")}`}
+                navigationTitle={movie.title}
+                metadata={
+                  <Detail.Metadata>
+                    <Detail.Metadata.TagList title="Genres">
+                      {movie.genre.map((genre) => (
+                        <Detail.Metadata.TagList.Item
+                          key={genre}
+                          text={genre}
+                          color={genreColors[genre as keyof typeof genreColors] || Color.Red}
+                        />
+                      ))}
+                    </Detail.Metadata.TagList>
+                    <Detail.Metadata.Label
+                      title="Release Date"
+                      text={movie.releaseDate.toLocaleDateString([], {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    />
+                  </Detail.Metadata>
+                }
+                actions={
+                  <ActionPanel>
+                    <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
+                  </ActionPanel>
+                }
+              />
+            }
+          />
+          <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
+        </ActionPanel>
+      }
+    />
+  );
+}
+
+export default function Command() {
+  const cinemas: CinemaLocation[] = [
+    { id: "1", name: "San Fernando" },
+    { id: "2", name: "Port of Spain" },
+  ];
+
+  const [cinema, setCinema] = useState<CinemaLocation>(cinemas[0]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [toast, setToast] = useState<Toast | null>(null);
   const currentDate = new Date();
+
+  const scraperConfig: ScraperConfig = {
+    "1": {
+      // San Fernando
+      path: scraperPath + "movie-towne-scraper",
+      args: ["--pos=false", "--print=false", "--verbose=false"],
+    },
+    "2": {
+      // Port of Spain
+      path: scraperPath + "movie-towne-scraper",
+      args: ["--pos=true", "--print=false", "--verbose=false"],
+    },
+  };
+  const { isLoading } = useExec(scraperConfig[cinema.id].path, scraperConfig[cinema.id].args);
+
+  const onCinemaChange = (newValue: string) => {
+    const selectedCinema = cinemas.find((cinema) => cinema.id === newValue);
+    if (selectedCinema) {
+      setCinema(selectedCinema);
+    }
+  };
 
   async function initializeToast(title: string) {
     const newToast = await showToast({
@@ -50,13 +193,14 @@ export default function Command() {
       } else {
         initializeToast("Parsing Movies...");
       }
-      parseMovies();
+      parseMovies(cinema);
     }
-  }, [isLoading]);
+  }, [isLoading, cinema]);
 
-  const parseMovies = async () => {
+  const parseMovies = async (cinema: CinemaLocation) => {
     try {
-      const rawData = fs.readFileSync(scraperPath + "movies.json", "utf-8");
+      const location = cinema.name.toLowerCase().replace(/\s+/g, "-");
+      const rawData = fs.readFileSync(scraperPath + "movies-" + location + ".json", "utf-8");
       const jsonData = JSON.parse(rawData);
 
       if (!jsonData || !Array.isArray(jsonData)) {
@@ -136,101 +280,12 @@ export default function Command() {
   };
 
   return (
-    <List isLoading={isLoading} searchBarPlaceholder="Search Movies...">
-      {movies.map((movie) => (
-        <List.Item
-          key={movie.link}
-          title={movie.title}
-          subtitle={(() => {
-            const nextShowTime = movie.nextShowing;
-
-            if (!nextShowTime) {
-              return "No upcoming showtimes for today";
-            }
-
-            return nextShowTime.toLocaleString([], {
-              weekday: "short",
-              hour: "numeric",
-              minute: "2-digit",
-              hour12: true,
-            });
-          })()}
-          accessories={movie.genre
-            .map(
-              (genre): List.Item.Accessory => ({
-                icon: Icon.Tag,
-                tooltip: genre,
-              }),
-            )
-            // .slice(0, 3)
-            .concat([{ date: movie.releaseDate }])}
-          actions={
-            <ActionPanel>
-              <Action.Push
-                title="Show Times"
-                icon={Icon.Calendar}
-                target={
-                  <Detail
-                    markdown={`
-${movie.synopsis}
-
-## Show Times
-
-| Date | Showtimes |
-|------|-----------|
-${movie.showTimes
-  .map(
-    (showTime) =>
-      `| ${showTime.date.toLocaleDateString([], {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      })} | ${showTime.times
-        .map((time) =>
-          time.toLocaleTimeString([], {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          }),
-        )
-        .join(", ")} |`,
-  )
-  .join("\n")}`}
-                    navigationTitle={movie.title}
-                    metadata={
-                      <Detail.Metadata>
-                        <Detail.Metadata.TagList title="Genres">
-                          {movie.genre.map((genre) => (
-                            <Detail.Metadata.TagList.Item
-                              key={genre}
-                              text={genre}
-                              color={genreColors[genre as keyof typeof genreColors] || Color.Red}
-                            />
-                          ))}
-                        </Detail.Metadata.TagList>
-                        <Detail.Metadata.Label
-                          title="Release Date"
-                          text={movie.releaseDate.toLocaleDateString([], {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        />
-                      </Detail.Metadata>
-                    }
-                    actions={
-                      <ActionPanel>
-                        <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
-                      </ActionPanel>
-                    }
-                  />
-                }
-              />
-              <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
-            </ActionPanel>
-          }
-        />
-      ))}
+    <List
+      isLoading={isLoading}
+      searchBarPlaceholder="Search Movies..."
+      searchBarAccessory={<CinemaDropdown cinemas={cinemas} onCinemaChange={onCinemaChange} />}
+    >
+      {movies.map((movie) => movieToListItem(movie))}
     </List>
   );
 }
