@@ -1,0 +1,848 @@
+@charset "utf-8";
+/* CSS Document */
+#main_wrapper{
+	width:1280px;
+	margin:0px auto;
+}
+
+#footer_container{
+	width:1280px;
+	margin:0px auto;
+}
+
+div.nav-menu-bg{
+	display:none;
+}
+
+#main_menu li a.home{
+	font-size:0px;
+}
+
+.list_slider .thumbnail, .blog_list .thumbnail_wrapper{
+	min-height:205px;
+}
+
+#filter #gallery-section .thumbnail a.html5lightbox img{
+	margin-top:0px !important;
+}
+
+@media screen and (max-width:1280px){
+
+.home_nav_slider_next{ right:18px;}
+.home_page_nav_slider .slide{ width: 315.5px;}
+#footer_container{ max-width:1260px;}
+}
+
+
+
+
+@media (min-width:980px) and (max-width:1100px){
+	img{ max-width:100%;}
+
+#main_wrapper, #footer_container, .ptu{ width:980px;}
+.background_inner_margin{ min-width:98%;}
+.home_page_nav_slider{ width:100% !important;}
+#main_menu ul{ float:left;}
+#main_menu li a{ padding:0 4px;}
+#main_menu li a.children{ padding-right: 27px;}
+#main_menu ul li:nth-child(9) ul, #main_menu ul li:nth-child(10) ul {  left: auto;  right: 0;}
+#main_menu ul li:nth-child(6) ul ul{ left: 100%;  right:auto;}
+.now_showing h1, .coming_soon h1{ font-size:1em; background-size:100% 60px; font-size: 12px}
+.new_this_week h1{ font-size:1em; background-size:100% 35px; font-size: 12px}
+.home_content_links .tab, .home_content_links .selected, .home_content_links .selected:hover{ padding:0 10px; font-size:14px; margin:0;}
+.movie_vote_box_expanded { margin-left: -330px; width: 590px;}
+form .input_wrapper_full { width: 95%;}
+#content .now_showing .home_vertical_slider, #content .coming_soon .home_vertical_slider {  height: 500px !important;}
+.home_content_links{ bottom:50px;}
+.center-logo{ width: 155px; height: 195px; top:20px; left:51.5%;}
+.center-logo img { max-width: 85%;}
+.content_body_blue_inner2, .ratings_table, .third_left.footer-privacy{ width:100%; max-width:100% !important;}
+.content_body_trim2 .jspPane{ padding:0 !important;}
+.fadeIn{ height:150px;}
+.left_column { margin-right: 0; width: 35%;}
+.middle_column { float: right;  width: 63%;}
+.list_slider .thumbnail, .blog_list .thumbnail_wrapper{ min-height:160px;}
+.input_wrapper textarea{ max-width:545px;}
+#header{ background:rgba(0, 0, 0, 0) url("../images/new-bg-header.png") no-repeat scroll center bottom / 100% auto}
+.content_title, .content_title2{ border:none; padding-bottom:25px; margin-top:0;}
+.content_links, .content_links_lower{ top:62px !important; border-bottom:3px solid #fbe721; padding:0 0 5px 0 !important; width:90%; text-align:right;}
+/*.movie_thumbnail .thumb{ max-height:150px;}*/
+.footer_block_3 .float_left { clear: both; padding-bottom: 25px;}
+.gallery_canvas_wrapper .slider_btn_lft, .gallery_canvas_wrapper .slider_btn_rgt{ left: -22px;  top: 49%; height:52px !important; width:52px !important;}
+.gallery_canvas_wrapper .slider_btn_rgt{  right:-20px; left:auto;}
+.vertical-menu, .movie_vote_box .ajax_form label, .map, .contact_map, #PrintArea form#banquet_enquiry_form .extra-textarea textarea, .third_left.footer-btm{ width:100%;}
+.vertical-menu ul{ margin-left:0;}
+#nav-item{ float:left; width:auto; margin-right:10px; text-align:center;}
+#nav-item li a{ text-align:center;}
+.content_body{ height:585px;}
+.quarter{ width:33%;}
+.movie_vote_box .ajax_form label.inline_label{ margin-right:0;}
+.movie_vote_box .ajax_form label{ height:auto;}
+.seatingDisplay{ margin-left:0;}
+.restaurant_shop_detail_header .content_title{ width:88%;}
+.content_logo{ width:10%;}
+#PrintArea form .time_wrapper{ width:90%;}
+.list_slider .hover_details{ left:40% !important;}
+.testimonial-div{ width:325px;}
+.special_description_wrapper{ width:100%; padding:30px 0;}
+.filter{ top:20px;}
+.content_header_full .content_links.modLinks_movies{ top:45% !important;}
+.content_data p{ margin-left:0 !important;}
+.shops_ico .overlay{ background:none;}
+.list_slider_bounds{ padding-top:50px;}
+#filter #gallery-section .thumbnail a.html5lightbox img{ max-height:113px;}
+form#performance_booking_form .input_wrapper {  width: auto; min-width:160px;}
+.content_header_full .content_links{ bottom:15px;}
+.content_links.home_content_links { border: medium none; bottom: 50px; top: auto !important; width: 100%;}
+.movie_schedule_bounds{ display:inline-block; margin-top:15px;}
+.tabs .ui-tabs-panel{ width:94%;}
+
+.list_slider .thumbnail strong a { background:none; border: medium none; border-radius: 0; color: #000; margin-left: 0; overflow: inherit;  position: static;}
+.blog_box p{ line-height:30px;}
+#PrintArea form#party_booking_form .time_wrapper, #PrintArea form#party_booking_form textarea, #PrintArea form#corporate-popup .time_wrapper, #PrintArea textarea{ width:auto;}
+.movie_vote_box #party_booking_form.ajax_form label.inline_label { margin-right: 10px;}
+.press-ul{ height:150px;}  
+form .input_wrapper{ width:184px;}
+#gallery-section .list_slider .category_thumbnail{ min-width:25%;}
+#gallery-section .thumb{ min-height:172px; max-height:186px;}
+.hide-label{ display:none;}
+#PrintArea form#corporate-popup .extra-textarea, #PrintArea form#banquet_enquiry_form .extra-textarea, .movie_schedule_utils{ width:98%;}
+#tenancy_form .hide-label, #performance_booking_form .hide-label{ display:none;}
+#contact_feedback_form .half_right{ margin:0;}
+.press_blog .movie_vote_list{ height:500px;}
+.movie_schedule_footer{ height:auto;}
+#side-event1 img{ margin:0 !important;}
+.movie_schedule_time_bounds .time_sheet{ width:65%;}
+.movie_schedule_time_bounds .time_title, .movie_schedule_legend .time_title{ width:23%; height:68px;}
+.movie_schedule_time_bounds .time_slot{ width:48px; font-size:11px; padding:2px; height:65px; line-height:65px;}
+.movie_schedule_time_bounds .time_rating{ height:58px;}
+.button_left{ float:left;}
+.footer_block_1, .footer_block_2, .footer_block_3{ height:auto;}
+
+.movie_details_header_inner .movie_share_box{float:left;}
+.content_body_movie_details .content_right{ margin-top:17px !important;}
+
+.movie_schedule_time_bounds .time_late span, .movie_schedule_time_bounds .time_early span{ padding:5px 0; }
+.content_links.home_content_links { text-align: center;}
+#main_menu li a{ font-size:10px;}
+
+.special_description_wrapper{ width:50%!important;}
+.restro{ width:88%;}
+.restaurant_shop_detail_header .restro .content_title{ width:50%;}
+.restro .content_links{ border:none; width:50%;}
+
+
+
+}
+
+
+@media (min-width:768px) and (max-width:979px){
+img{ max-width:100%;}
+#main_wrapper, #footer_container, .ptu{ width:740px;}
+#main_menu ul{ float:left;}
+#main_menu li a{ padding:0 4px;}
+#main_menu li a.children{ padding-right: 2px;}
+
+#main_menu ul li:nth-child(9) ul, #main_menu ul li:nth-child(10) ul {  left: auto;  right: 0;}
+#main_menu ul li:nth-child(6) ul ul{ left: 100%;  right:auto;}
+.background_inner_margin{ min-width:98%;}
+.home_page_nav_slider, .content_body_blue_inner2, .ratings_table, .third_left.footer-privacy, .movie_schedule_utils{ width:100% !important;  max-width:100% !important;}
+.nav_arrow{ display:none;}
+.now_showing h1, .coming_soon h1{ font-size:1em; background-size:100% 60px; font-size: 12px}
+.new_this_week h1{ font-size:1em; background-size:100% 35px; font-size: 12px}
+
+.home_content_links .tab, .home_content_links .selected, .home_content_links .selected:hover{ padding:0 10px; font-size:14px;}
+/*.main_footer .half{ width:100%; border-bottom:1px solid #fff;}*/
+/*.footer_stripe{ background:none;}*/
+.home_page_nav_slider .slide{ width:335px;}
+.home_content_links{ bottom:50px;}
+
+.movie_vote_box_expanded { margin-left: -330px; width: 590px;}
+form .input_wrapper_full, .two_third_left, .float_left .third_right, .third_left.footer-btm{ width: 95%;}
+#content .now_showing .home_vertical_slider, #content .coming_soon .home_vertical_slider {  height: 500px !important;}
+.footer_third.third_right {  width: 33%;}
+.monster { margin: 0 0 0 7%; text-align: right;}
+
+.social li{ width:40%;}
+.center-logo{ width: 155px; height: 195px; top:20px; left:52.2%;}
+.center-logo img { max-width: 85%;}
+.content_title2{ width:90%;}
+.content_title2{ font-size:1.7em;  margin-top: 32px;}
+.gallery_canvas_wrapper .slider_btn_lft, .gallery_canvas_wrapper .slider_btn_rgt{ left: -22px;  top: 49%; height:52px !important; width:52px !important;}
+.gallery_canvas_wrapper .slider_btn_rgt{  right:-20px; left:auto;}
+.content_body_trim2 .jspPane{ padding:0 !important;}
+.fadeIn{ height:120px;}
+.left_column { margin-right: 0; width: 35%;}
+.middle_column { float: right;  width: 63%;}
+
+.ui-tabs .ui-tabs-nav li a{ padding:0.5em 0.4em; font-size:12px; font-weight:normal;}
+.list_slider .thumbnail, .blog_list .thumbnail_wrapper{ min-height:125px;}
+.input_wrapper textarea{ max-width:545px;}
+#header{ background:rgba(0, 0, 0, 0) url("../images/new-bg-header.png") no-repeat scroll center bottom / 100% auto}
+.b-close{ right:-10px;}
+.content_title, .content_title2{ border:none; padding-bottom:25px; margin-top:0;}
+.content_links, .content_links_lower{ top:60px !important; border-bottom:3px solid #fbe721; padding:0 0 5px 0 !important; width:88%; text-align:right;}
+.movie_audience_rating_wrapper{ float:right; width:60px; padding:4px 2px; margin-left:2px;}
+.movie_vote{ margin-left:5px;}
+/*.movie_thumbnail .thumb{ max-height:150px;}*/
+.vertical-menu, .movie_vote_box .ajax_form label, .map, .contact_map, #PrintArea form#banquet_enquiry_form .extra-textarea textarea{ width:100%;}
+.vertical-menu ul{ margin-left:0;}
+#nav-item{ float:left; width:auto; margin-right:10px; text-align:center;}
+#nav-item li a{ text-align:center;}
+.content_body{ height:585px;}
+.quarter{ width:33%;}
+.movie_vote_box .ajax_form label.inline_label{ margin-right:0;}
+.movie_vote_box .ajax_form label{ height:auto;}
+.seatingDisplay{ margin-left:0;}
+.restaurant_shop_detail_header .content_title{ width:88%;}
+.content_logo{ width:10%;}
+#PrintArea form .time_wrapper{ width:90%;}
+.list_slider .hover_details{ left:40% !important;}
+.special_description_wrapper{ width:100%; padding:30px 0;}
+.filter{ top:20px;}
+.content_header_full .content_links.modLinks_movies{ top:34% !important;}
+.content_data p{ margin-left:0 !important;}
+.shops_ico .overlay{ background:none;}
+.list_slider_bounds{ padding-top:50px;}
+#filter #gallery-section .thumbnail a.html5lightbox img{ max-height:113px;}
+form#performance_booking_form .input_wrapper {  width: auto; min-width:160px;}
+.content_header_full .content_links{ bottom:27px; top:43% !important;}
+.content_links.home_content_links { border: medium none; bottom: 50px; top: auto !important;  width: 100%;}
+.movie_schedule_bounds{ display:inline-block; margin-top:15px;}
+.tabs .ui-tabs-panel{ width:94%;}
+.list_slider .thumbnail strong a { background:none; border: medium none; border-radius: 0; color: #000; margin-left: 0; overflow: inherit;  position: static;}
+.blog_box p{ line-height:30px;}
+.bx-wrapper .bx-controls-direction a{ top:41%;}
+ul.rig li h3{ font-size:12px;}
+.event img{ height:210px;}
+#PrintArea form#party_booking_form .time_wrapper, #PrintArea form#party_booking_form textarea, #PrintArea form#corporate-popup .time_wrapper, #PrintArea textarea{ width:auto;}
+.movie_vote_box #party_booking_form.ajax_form label.inline_label { margin-right: 10px;}
+.press-ul{ height:150px;}  
+#event_location_select, #event_category_select{ width:125px;}
+form .input_wrapper{ width:184px;}
+#gallery-section .list_slider .category_thumbnail{ min-width:25%;}
+#gallery-section .thumb{ min-height:172px;}
+.hide-label{ display:none;}
+#PrintArea form#corporate-popup .extra-textarea, #PrintArea form#banquet_enquiry_form .extra-textarea{ width:98%;}
+#tenancy_form .hide-label, #performance_booking_form .hide-label{ display:none;}
+#contact_feedback_form .half_right{ margin:0;}
+.press_blog .movie_vote_list{ height:500px;}
+
+#html5-lightbox-box, #html5-elem-wrap { max-width: 750px !important;}
+#html5-image {  box-sizing: border-box;  max-width: 750px !important;}
+.movie_schedule_footer{ height:auto;}
+#side-event1 img{ margin:0 !important;}
+.home_content_links .tab{ margin:0;}
+.calendar .hover_details{ left:auto !important; right:60px !important;}
+.movie_schedule_time_bounds .time_sheet{ width:65%;}
+.movie_schedule_time_bounds .time_title, .movie_schedule_legend .time_title{ width:23%; height:68px;}
+.movie_schedule_time_bounds .time_slot{ width:48px; font-size:11px; padding:2px; height:65px; line-height:65px;}
+.movie_schedule_time_bounds .time_rating{ height:58px;}
+.button_left{ float:left;}
+.footer_block_1, .footer_block_2, .footer_block_3{ height:auto;}
+
+#footer_container .half .pad_lr_20 h1{ font-size:18px;}
+.float_left .footer-btm .pad_r_20{ padding-right:0px;}
+
+.float_left .foot_contact{ font-size:11px;}
+.footer_block_3 .foot_logo{ padding-bottom:50px;}
+.footer_block_2 .dachin-logo span{ font-size:13px;}
+.movie_schedule_time_bounds .time_late span, .movie_schedule_time_bounds .time_early span{ padding:5px 0;}
+.content_body_movie_details .content_right{ margin-top:12px !important;}
+.dachin-logo{ padding:26px 0;}
+
+.movie_details_header_inner .movie_share_box{float:left;}
+.content_links.home_content_links { text-align: center;}
+
+#main_menu li a {font-size: 10px !important;}
+
+.special_description_wrapper{ width:50%!important;}
+
+.bx-wrapper{ max-height:290px !important;}
+
+.restro{ width:88%;}
+.restaurant_shop_detail_header .restro .content_title{ width:50%;}
+.restro .content_links{ border:none;}
+
+
+
+}
+
+
+
+
+
+@media screen and (max-width: 700px){
+	.list_slider .thumbnail, .blog_list .thumbnail_wrapper{
+		min-height:inherit;		
+	}
+	
+	#main_wrapper, #footer_container{
+		width:100%;
+	}
+	
+	#container{
+		position:static;
+		width:100%;
+	}
+	
+	/*Header*/
+	#header_background .background_inner_margin{
+		max-width:none;
+		min-width:inherit;
+	}
+	/*End header*/
+	
+	/*Home slider*/
+	.background_inner_margin .home_slider{
+		min-width:inherit;
+		max-width:none;
+	}
+	/*End home slider*/
+	
+	/*Main menu*/
+	#main_menu ul{
+		display:none;
+	}
+
+	#main_menu ul.open{
+		display:block;
+	}
+	
+	div.nav-menu-bg{
+		display:block;
+	}
+	
+	div.nav-menu-bg{
+		background:#135296;
+		border-top:1px solid #fdf194;
+		border-bottom:1px solid #fdf194;	
+	}
+	
+	a.nav-button {
+		background: url("../images/mobile_menu.png") no-repeat scroll right top;
+		color: #fff;
+		cursor: pointer;
+		display: block;		
+		font-size: 16px;
+		height: 28px;	
+		padding:0px;
+		margin:8px 20px 0px 0px;
+		text-transform: uppercase;
+		width:80px;
+		float:right;				
+	}
+	
+	#navigation_background{
+		background-image:none;
+		border:none;
+	}
+	
+	#navigation_background .background_inner_margin{
+		min-width:inherit;
+		max-width:none;
+		width:100%;
+	}
+	
+	#navigation_background .background_inner_margin #main_menu{
+		height:auto;
+		line-height:normal;
+	}
+	
+	#main_menu ul{
+		width:100%;
+		height:auto;
+		background-color:#0569ae;
+	}
+	
+	#main_menu li{
+		background-image:none;
+		display:block;
+		height:auto;
+	}
+	
+	#main_menu ul li a.home{
+		background-position:15px center;
+		font-size:11px;
+		width:100%;
+		border-bottom:1px solid #FFF;
+	}
+	
+	#main_menu ul li ul{
+		position:static;
+		display:block;
+		background-image:none;
+		box-shadow:none;
+		border:none;
+		border-top:1px solid #FFF;
+	}
+	
+	#main_menu ul li ul li{
+		height:auto;
+		border:none;		
+	}
+	
+	#main_menu ul li ul li a{
+		padding:0px 0px 0px 30px;
+		border-bottom:1px solid #FFF;
+	}
+	
+	#main_menu ul li ul li ul{
+		background-image:none;
+		border:none;
+		box-shadow:none;
+	}
+	
+	#main_menu ul li ul li ul li a{
+		padding:0px 0px 0px 50px;
+	}
+	
+	#main_menu ul li ul > li{
+		
+	}
+	
+	#main_menu ul li ul li:last-child{
+		border-bottom:none;
+	}
+	
+	span.nav_arrow{
+		display:none;
+	}
+	
+	span.nav_arrow2{
+		display:none;
+	}
+	
+	#main_menu li:hover > a, 
+	/*#main_menu li a:hover, */
+	#main_menu li.active > a, 
+	#main_menu li.active > a.active{
+		background-color:transparent;
+		color:#FFF;
+	}
+	
+	#main_menu li.active{
+		background:none !important;
+	}
+	
+	#main_menu li a:hover{
+		background-color:#f4ae2a;
+	}
+			
+	/*End main menu*/	
+		
+	/*top slider*/
+	.background .home_slider{
+		min-width:inherit;
+		max-width:none;
+	}
+	
+	.home_page_nav_slider{		
+		left:0px;
+	}
+	
+	.home_page_nav_slider .cycle-carousel-wrap{
+		width:100%;
+	}
+	/*End top slider*/
+	
+	#body_content_background .background_inner_margin{
+		min-width:0px;
+		max-width:none;
+		width:100%;
+	}
+	
+	#content .sidebar_left{
+		float:none;
+		width:100%;
+		padding:0px;
+		text-align:center;
+	}
+	
+	#content .sidebar_left .content_data p,
+	#content .sidebar_left .content_data a{
+		float:none;
+	}
+	
+	#content .sidebar_left .content_data img{
+		float:none;
+		width:35%;
+	}
+	
+	#content .sub_content_home{
+		float:none;
+		width:100%;
+	}
+	
+	#content .now_showing{
+		width:100%;
+		max-width:none;
+		min-height:10px;		
+	}
+	
+	#content .sub_content_home .new_this_week{
+		width:100%;
+		max-width:none;
+		min-height:10px;
+	}
+	
+	#content .coming_soon{
+		width:100%;
+		max-width:none;
+		min-height:10px;
+	}
+		
+	#content .sub_content_home .home_content_links{
+		bottom:0px;
+		position:static;
+		clear:both;
+	}
+	
+	.now_showing h1, .coming_soon h1{
+		font-size:15px;
+		background-size:100% 100%;
+		line-height:46px;
+	}
+	
+	.new_this_week h1{
+		font-size:15px;
+		height:45px;
+		line-height:45px;
+		padding:0px;
+		background:url("../images/light_board_mid.png") no-repeat scroll left top;
+	}	
+	
+	.sub_content_home .now_showing .home_vertical_slider .cycle-carousel-wrap,
+	.coming_soon .float_left .home_vertical_slider .cycle-carousel-wrap{
+		position: relative !important;
+		top:0px !important;
+	}
+	
+	.home_fade_slider, .home_fade_slider_glows{
+		margin-top:3px;
+	}
+	
+	#content .sidebar_right{
+		float:none;	
+		padding:0px;
+		margin:0px auto;
+		width:155px;
+		min-height:495px;
+	}
+	
+	#content .sidebar_right .fadeIn{
+		height:auto;
+	}
+	
+	#body_content_background{
+		margin:0px;
+	}
+	
+	/*Home page showing*/
+	.home_page_yellow_glows .shadow{
+		box-shadow:none;
+	}
+	
+	.shadow{
+		box-shadow:none;
+	}
+	/*End home page showing*/	
+	
+	/*Footer*/
+	#footer{
+		background-image:none;
+		background-color: #4b0000;
+	}
+	
+	#big_footer_underlay,
+	#big_footer_underlay_pattern{
+		background-image:none;
+		background-color:transparent;
+	}
+	
+	#big_footer_background .overlay{
+		background-color:transparent;
+		display:none;
+	}
+	
+	#footer_background{
+		position:static;
+		background:#9A1F15;
+	}
+	
+	#footer_background .background_inner_margin{
+		width:100%;
+		margin:0px;
+		max-width:none;
+		min-width:0px;
+	}
+	
+	.main_footer .half{
+		float:none;
+		width:100%;
+		overflow:hidden;
+	}
+	
+	.main_footer .half .footer_stripe{
+		height:auto;
+		background-image:none;
+	}
+	
+	.main_footer .half .footer_block_2,
+	.main_footer .half .footer_block_3{
+		width:100%;
+		text-align:center;
+		padding:0px;
+		height:auto;
+	}
+	
+	.main_footer .half .footer_block_3 .pad_lr_20{
+		padding:0px;		
+	}
+	
+	.main_footer .half .footer_block_3 .pad_lr_20 .foot_logo{
+		float:none;
+	}
+	
+	.main_footer .half .pad_lr_20 h1{
+		text-align:center;
+		font-size:18px;
+		margin:0px 0px 5px;
+	}
+	
+	.main_footer .half .footer_stripe .float_left{
+		text-align:center;
+	}
+	
+	.float_left .footer_third{		
+		float:none;
+		width:100%;
+	}
+	
+	.float_left .two_third_left{
+		float:none;
+		width:100%;
+	}
+	
+	.float_left .two_third_left .pad_l_20{
+		padding:0px;
+	}
+	
+	.float_left .third_right{
+		float:none;
+		width:100%;
+		margin:0px;
+	}
+	
+	.float_left .third_right p.monster{
+		text-align:center;
+	}
+	
+	#footer_nav ul{
+		overflow:hidden;
+		margin:0px auto;
+		padding:0px;
+		width:120px;
+	}
+	
+	#footer_nav ul li{
+		display:block;
+		line-height:normal;
+	}
+	
+	#footer_nav ul li a{
+		border:none;
+		font-size:12px;
+		display:inline-block;
+		display:block;
+		text-align:center;
+		padding:5px 0px;
+		margin:0px;
+	}
+	
+	#small_footer_background{
+		background:#b54614;
+		height:auto;
+	}
+	
+	#small_footer_background #small_footer_underlay{
+		position:static;
+		display:none;
+	}
+	/*End footer*/
+	
+	/*port-of-spain*/
+	.content_header_full img.icons{
+		display:none;
+	}
+	
+	.content_right_wrapper .movie_details_header{
+		height:auto;
+	}
+	
+	.movie_details_header .movie_share_box{
+		float:none;
+		height:auto;
+	}
+	
+	.content_header_full .content_links{
+		position:static;
+	}
+	
+	#content .sub_content{
+		width:96%;
+	}
+	
+	.sub_content .content_title2{
+		float:none;
+		width:100%;
+		font-size:20px;
+	}
+	
+	.content_body_movie_details .content_left{
+		width:100%;
+		background:none;
+		height:auto;
+		line-height: normal;
+	}
+	
+	.content_body_movie_details .content_left img{
+		vertical-align:top;
+	}
+	
+	.content_body_movie_details .content_right_wrapper{
+		width:100%;
+	}
+	
+	.sub_content .content_detail{
+		overflow:hidden;
+	}
+	/*port-of-spain*/
+	
+	/*page/details/ticket-prices/cinemas*/
+	.content_body_wrapper .content_body2 .content_body_blue_inner2.jspScrollable{
+		width:100% !important;
+	}
+	
+	.jspContainer .content_body_blue_grad{
+		padding:0px;
+	}
+	
+	.jspScrollable .jspContainer,
+	.jspScrollable .jspContainer .jspPane{
+		width:100% !important;
+		padding:0px !important;
+	}
+	/*End page/details/ticket-prices/cinemas*/	
+	
+	/*page/details/gift-vouchers/cinemas*/
+	.content_body_blue_grad_scroller .rowvoucher {
+		display:block;
+	}
+	
+	.content_body_blue_grad_scroller .rowvoucher .col{
+		display:block;
+		width:100%;
+		padding:0px;
+	}
+	
+	.content_body_blue_grad_scroller .rowvoucher .col .voucherdesc{
+		padding:0px;
+	}
+	
+	.content_body_blue_inner .content_body_blue_grad_scroller{
+		padding:10px;
+	}
+	/*End page/details/gift-vouchers/cinemas*/
+	
+	/*page/details/movie-ratings/cinemas*/
+	.content_body_blue_grad_scroller .ratings_table{
+		width:100%;
+	}
+	
+	.ratings_table .left_column{
+		width:100%;
+		text-align:center;
+		float:none;
+	}
+	
+	.ratings_table .middle_column{
+		float:none;
+		width:100%;
+		text-align:center;
+	}
+	/*End page/details/movie-ratings/cinemas*/
+	
+	/*shops*/
+	.content_detail .content_links{
+		position:relative;
+		top:0px !important;
+		padding:0px !important;
+	}
+	/*End shops*/
+	.content_body .vertical-menu{
+		float:none;
+		width:100%;
+	}
+	
+	.content_body .vertical-menu ul{
+		margin:0px;
+	}
+	
+	.content_body .jspScrollable{
+		width:100% !important;		
+	}
+	
+	.content_body .jspScrollable .jspContainer{		
+		width:100% !important;
+	}
+	
+	.content_body_wrapper .content_body{
+		padding:0px !important;
+	}	
+	
+	/*banquet*/
+	.seatingDisplay{
+		margin:0px;
+	}
+	
+	#movie_vote_wrapper .movie_vote_box_expanded{
+		width:100%;
+		margin-left:-224px;
+	}
+	
+	#PrintArea .half_left{
+		width:100%;
+		margin:0px;		
+	}	
+	
+	#PrintArea .half_right{
+		width:100%;
+		margin:0px;
+	}
+	/*#End banquet*/
+	
+	/*corporate/gallery#filter*/
+	.list_slider_body .relative{
+		width:96%;
+	}
+	
+	.relative .list_slider_body .slider_btn_lft{
+		left:-23px;
+	}
+		
+	.relative .list_slider_body .slider_btn_rgt{
+		right:-27px;
+	}
+	/*End corporate/gallery#filter*/
+	
+	.restaurant_shop_detail_header .restro .content_title, .restro .content_links{ width:100%;}
+
+}
+
+@media screen and (max-width: 480px){
+	
+.bx-wrapper{ max-height:160px;}
+	
+	
+	}

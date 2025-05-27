@@ -7,6 +7,8 @@ import (
 	"os"
 	"slices"
 	"time"
+
+	"github.com/gocolly/colly"
 )
 
 const (
@@ -32,7 +34,8 @@ func scrapeAndSave(url string) error {
 	}
 
 	for i := range movies {
-		err := movies[i].scrapeMovieTimes()
+		c := colly.NewCollector()
+		err := movies[i].scrapeMovieTimes(c)
 		if err != nil {
 			return err
 		}

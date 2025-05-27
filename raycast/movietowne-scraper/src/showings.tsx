@@ -2,33 +2,7 @@ import { useEffect, useState } from "react";
 import fs from "fs";
 import { ActionPanel, Action, List, Toast, showToast, Color, Icon, Detail } from "@raycast/api";
 import { useExec } from "@raycast/utils";
-import { scraperPath, Movie, ShowTime, CinemaLocation, ScraperConfig } from "./types";
-
-const genreColors = {
-  Action: "#E63946", // Vibrant red
-  Adventure: "#F9A826", // Golden amber
-  Animated: "#00B4D8", // Bright cyan
-  Children: "#96E072", // Light green
-  Comedy: "#FFD166", // Sunny yellow
-  Drama: "#6A4C93", // Deep purple
-  Family: "#8AC926", // Grass green
-  "Fantasy/Adventure": "#7209B7", // Magical purple
-  Fantasy: "#7209B7", // Magical purple
-  Horror: "#480CA8", // Dark violet
-  "Horror/Thriller": "#3A0CA3", // Deep indigo purple
-  "Thriller/Horror": "#590925", // Dark burgundy
-  "Drama/Thriller": "#4B3A26", // Dark amber/brown
-  Music: "#FB5607", // Bright orange
-  "Musical/Performing Arts": "#FF85EA", // Pink
-  Romance: "#FF5D8F", // Rose pink
-  "Sci-Fi": "#3A86FF", // Electric blue
-  Thriller: "#073B4C", // Dark teal
-  "Action/Thriller": "#073B4C", // Dark teal
-  "Drama/Suspense": "#8C1D40", // Deep crimson
-  Biography: "#2A9D8F", // Teal green
-  Suspense: "#540B0E", // Deep burgundy red
-  Crime: "#540B0E", // Deep burgundy red
-};
+import { scraperPath, Movie, ShowTime, CinemaLocation, ScraperConfig, genreColors } from "./types";
 
 function CinemaDropdown(props: { cinemas: CinemaLocation[]; onCinemaChange: (newValue: string) => void }) {
   const { cinemas, onCinemaChange } = props;
@@ -127,6 +101,7 @@ ${movie.showTimes
                         year: "numeric",
                       })}
                     />
+                    <Detail.Metadata.Label title="Runtime" text={movie.runTime || "Unknown"} />
                   </Detail.Metadata>
                 }
                 actions={
@@ -223,6 +198,7 @@ export default function Command() {
           title: movie.title,
           releaseDate: new Date(movie.releaseDate),
           genre: movie.genre,
+          runTime: movie.runTime,
           nextShowing:
             showTimes
               .slice(0, 1)
