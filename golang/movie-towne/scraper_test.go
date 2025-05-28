@@ -10,6 +10,37 @@ import (
 	"github.com/gocolly/colly"
 )
 
+// Scraped movie should have the same data as this, except for link
+const sinnersJSON = `{
+    "title": "Sinners",
+    "releaseDate": "2025-04-17T00:00:00-04:00",
+    "link": "https://www.movietowne.com/cinemas/nowshowing/san-fernando/sinners",
+    "runTime": "140 mins.",
+    "showTimes": [
+      {
+        "date": "2025-05-27T00:00:00-04:00",
+        "times": [
+          "2025-05-27T14:00:00-04:00",
+          "2025-05-27T21:30:00-04:00"
+        ]
+      },
+      {
+        "date": "2025-05-28T00:00:00-04:00",
+        "times": [
+          "2025-05-28T14:00:00-04:00",
+          "2025-05-28T21:30:00-04:00"
+        ]
+      }
+    ],
+    "genre": [
+      "Action",
+      "Drama",
+      "Horror",
+      "Thriller"
+    ],
+    "synopsis": "Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back."
+  }`
+
 func TestMovieScrape(t *testing.T) {
 	transport := &http.Transport{}
 	transport.RegisterProtocol("file", http.NewFileTransport(http.Dir("/")))
@@ -37,6 +68,6 @@ func TestMovieScrape(t *testing.T) {
 
 	expected := "140"
 	if m.RunTime != expected {
-		t.Error("expected run time to be "+expected+" , got:", m.RunTime)
+		t.Errorf("expected run time %s, got %s", expected, m.RunTime)
 	}
 }
