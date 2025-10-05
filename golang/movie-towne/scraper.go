@@ -30,6 +30,7 @@ type (
 		ShowTimes   []ShowTime `json:"showTimes"`
 		Genre       []string   `json:"genre"`
 		Synopsis    string     `json:"synopsis"`
+		ThumbNail   string     `json:"thumbnail"`
 	}
 )
 
@@ -59,8 +60,8 @@ func scrapeMovies(site string) (movies []Movie, err error) {
 			}
 		})
 
-		link := e.ChildAttr("a", "href")
-		m.Link = link
+		m.ThumbNail = e.ChildAttr("img", "src")
+		m.Link = e.ChildAttr("a", "href")
 
 		movies = append(movies, m)
 	})

@@ -80,7 +80,10 @@ ${movie.showTimes
         )
         .join(", ")} |`,
   )
-  .join("\n")}`}
+  .join("\n")}
+
+![Movie thumbnail](${movie.thumbnail} "Movie thumbnail")
+`}
                 navigationTitle={movie.title}
                 metadata={
                   <Detail.Metadata>
@@ -206,6 +209,7 @@ export default function Command() {
               .find((time) => time > currentDate) || null,
           link: movie.link,
           synopsis: movie.synopsis,
+          thumbnail: movie.thumbnail,
           showTimes,
         };
       });
