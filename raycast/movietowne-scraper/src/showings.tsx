@@ -110,12 +110,22 @@ ${movie.showTimes
                 actions={
                   <ActionPanel>
                     <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
+                    <Action.CopyToClipboard
+                      content={movie.link}
+                      title="Copy Movie Link"
+                      shortcut={{ modifiers: ["cmd", "shift"], key: "c" }}
+                    />
                   </ActionPanel>
                 }
               />
             }
           />
           <Action.OpenInBrowser url={movie.link} title="Open Movie Page" />
+          <Action.CopyToClipboard
+            content={movie.link}
+            title="Copy Movie Link"
+            shortcut={{ modifiers: ["cmd", "shift"], key: "c" }}
+          />
         </ActionPanel>
       }
     />

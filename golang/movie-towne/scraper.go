@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	currentYear = 2025
+	currentYear = 2026
 
 	releaseFormat  = "02/01/2006"
 	airDateFormat  = "Mon, 2 Jan"

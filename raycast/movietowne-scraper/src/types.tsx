@@ -56,5 +56,7 @@ export const genreColors = {
   Movies: "#6C757D",                    // Neutral gray
   Superhero: "#0066CC",              // Superhero blue
   "Children/Comedy": "#B8E994",  // Light lime green
-  "Crime/Drama": "#4B3A26"          // Dark amber/brown
+  "Crime/Drama": "#4B3A26",          // Dark amber/brown
+  "History": "#A67B5B",                    // Earthy brown
+  "Local Production": "#FFB703"          // Warm yellow
 };
